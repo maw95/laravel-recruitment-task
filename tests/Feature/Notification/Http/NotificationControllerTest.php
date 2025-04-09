@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Tests\Feature\Notification\Http;
 
 use Illuminate\Foundation\Testing\WithFaker;
+use Illuminate\Support\Facades\Event;
 use PHPUnit\Framework\Attributes\DataProvider;
 use Tests\TestCase;
 
@@ -26,6 +27,8 @@ class NotificationControllerTest extends TestCase
             'action' => $action,
             'reference' => $this->faker->uuid,
         ]);
+
+        Event::fake();
 
         $this->getJson($uri)->assertOk();
     }
